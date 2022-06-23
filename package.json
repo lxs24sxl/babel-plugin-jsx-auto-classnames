@@ -1,0 +1,42 @@
+{
+  "name": "babel-plugin-jsx-auto-classnames",
+  "version": "1.0.0",
+  "description": "If the className property uses a jsx object, the classnames dependency is automatically introduced",
+  "main": "lib/index.js",
+  "scripts": {
+    "build": "father-build",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lxs24sxl/babel-plugin-jsx-auto-classnames.git"
+  },
+  "keywords": [
+    "babel",
+    "babel-plugin",
+    "jsx",
+    "classnames",
+    "className",
+    "auto",
+    "react"
+  ],
+  "author": "lxs24sxl <lxs24sxl@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/lxs24sxl/babel-plugin-jsx-auto-classnames/issues"
+  },
+  "files": [
+    "src",
+    "lib",
+    "package.json",
+    "README.md"
+  ],
+  "homepage": "https://github.com/lxs24sxl/babel-plugin-jsx-auto-classnames#readme",
+  "dependencies": {
+    "@babel/helper-module-imports": "^7.16.7",
+    "classnames": "*"
+  },
+  "devDependencies": {
+    "father-build": "^1.22.3"
+  }
+}
