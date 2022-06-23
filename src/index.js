@@ -56,14 +56,16 @@ export default function (babel) {
       }
     },
     JSXAttribute (path) {
-      const { type, expression } = path.node.value
+      const value = path.node.value
+      if (!value) return
 
+      const { type, expression } = value
       if (
-        // 判断属性是classNames
+        // Determine the className property
         path.node.name.name === 'className' &&
-        // 判断是否是JSX语法
+        // Make sure it's a JSXExpressionContainer
         type === 'JSXExpressionContainer' &&
-        // 判断是否要
+        // Determined to be within manageable limits
         expression &&
         CLASS_NAME_MAP[expression.type]
       ) {

@@ -54,8 +54,9 @@ export default defineConfig({
 ```
 ⬇️
 ```javascript
+import _classNames from 'classnames'
 <div
-  className={classNames({
+  className={_classNames({
     selected: true
   })}>
 </div>
@@ -102,6 +103,15 @@ function App () {
 }
 ```
 
+
 ## TODO
 - [x] Avoid multiple imports of classnames' dependency packages
 - [ ] Find a compatible solution for TS
+```javascript
+declare namespace React {
+  interface HTMLAttributes<any> extends AriaAttributes, DOMAttributes<any>  {
+    className?: Record<string, boolean> | (string | Record<string, boolean>)[]
+  }
+}
+```
+- [ ] Add `exclude` and `include` attributes
