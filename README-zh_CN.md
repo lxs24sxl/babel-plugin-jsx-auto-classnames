@@ -2,13 +2,14 @@
 
 `import xxx from 'classnames'`
 
-This plugin is used to automatically add and supplement `xxx()` to the `className` property of jsx
+该插件用于拓展 `jsx` 的 `className` 属性，为属性自动添加 `classnames` 依赖
+
 
 [![NPM version](https://img.shields.io/npm/v/babel-plugin-jsx-auto-classnames.svg?style=flat)](https://npmjs.org/package/babel-plugin-jsx-auto-classnames)
 
-English | [简体中文](./README-zh_CN.md)
+[English](./README.md) | 简体中文
 
-## 📦  Install
+## 📦  安装
 
 ```
 npm i babel-plugin-jsx-auto-classnames --save-dev
@@ -17,7 +18,7 @@ or
 ```
 pnpm add babel-plugin-jsx-auto-classnames -D
 ```
-##  🖥 config
+##  🖥 配置
 ### vite.config.js
 
 ```js
@@ -49,9 +50,9 @@ export default defineConfig({
 }
 ```
 
-## 🔨 Usage
+## 🔨 用法
 
-### normal
+### 常规使用
 
 ```javascript
 <div
@@ -70,7 +71,7 @@ import _classNames from 'classnames'
 </div>
 ```
 
-### Reuse the alias of the imported package
+### 自动引入依赖的别名
 ```javascript
 import xxx from 'classnames'
 function App () {
@@ -111,22 +112,22 @@ function App () {
 }
 ```
 
-## Options
+## 参数
 
 ### `extensions`
 
-- **Type:** `string[]`
-- **Default:** `['.jsx', '.tsx']`
+- **类型:** `string[]`
+- **默认值:** `['.jsx', '.tsx']`
 
 ### `excludes`
 
-- **Type:** `string[]`
-- **Default:** `['node_modules']`
+- **类型:** `string[]`
+- **默认值:** `['node_modules']`
 
 
-## TODO
-- [x] Avoid multiple imports of classnames' dependency packages
-- [x] Find a compatible solution for TS
+## 待办
+- [x] 避免多次导入`classnames`依赖
+- [x] 找到ts的兼容方案
 ```javascript
 declare namespace React {
   interface HTMLAttributes<any> extends AriaAttributes, DOMAttributes<any>  {
@@ -134,6 +135,6 @@ declare namespace React {
   }
 }
 ```
-- [x] Add `excludes` attributes
-- [x] Add `extensions` attributes
-- [ ] Unit Testing
+- [x] 添加 `excludes` 排除属性
+- [x] 添加 `extensions` 文件拓展属性
+- [ ] 编写单元测试代码
