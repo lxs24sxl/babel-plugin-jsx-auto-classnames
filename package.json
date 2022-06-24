@@ -1,6 +1,6 @@
 {
   "name": "babel-plugin-jsx-auto-classnames",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "If the className property uses a jsx object, the classnames dependency is automatically introduced",
   "main": "lib/index.js",
   "scripts": {
