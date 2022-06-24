@@ -1,4 +1,5 @@
 import { addDefault } from "@babel/helper-module-imports"
+import _path from 'path'
 
 const CLASS_NAME_TYPES = ['CallExpression', 'ObjectExpression', 'ArrayExpression', 'Identifier']
 
@@ -9,6 +10,11 @@ const CLASS_NAME_MAP = CLASS_NAME_TYPES.reduce((map, type) => {
 
 const DEFAULT_CLASSNAMES_IMPORT_KEY = 'classNames'
 const DEFAULT_CLASSNAMES_IMPORT_VALUE = 'classnames'
+
+const DEFAULT_OPTIONS = Object.freeze({
+  EXTENSIONS: ['.jsx', '.tsx'],
+  EXCLUDES: ['node_modules']
+})
 
 function getProgram (t, path) {
 	if (t.isProgram(path.parent)) return path.parent
@@ -33,20 +39,42 @@ function getImportKeyByPackageName (t, program, name = 'classnames') {
   return sourceName
 }
 
+function checkExtensions (state) {
+  const opts = state && state.opts ? state.opts : {}
+  const filename = state && state.filename ? state.filename : ''
+  if (!filename) return false
+  const extensions = opts.extensions || DEFAULT_OPTIONS.EXTENSIONS
+  const extname = _path.extname(filename)
+  return extensions.includes(extname)
+}
+
+function checkExcludes (state) {
+  const opts = state && state.opts ? state.opts : {}
+  const filename = state && state.filename ? state.filename : ''
+  if (!filename) return false
+  const excludes = opts.excludes || DEFAULT_OPTIONS.EXCLUDES
+  const suffixFilePath = filename.replace(process.cwd(), '')
+  return !excludes.some(key => suffixFilePath.indexOf(key) > -1)
+}
+
 export default function (babel) {
   const { types: t } = babel
   let classNamesKey = null
-
   const visitor = {
     Program: {
       enter () {
         classNamesKey = null
+        return false
       },
       exit () {
         classNamesKey = null
+        return false
       }
     },
-    ImportDeclaration (path) {
+    ImportDeclaration (path, state) {
+      if (!checkExtensions(state)) return
+      if (!checkExcludes(state)) return
+
       if (path.isImportDeclaration()) {
         const source = path.get('source')
         if (source.isStringLiteral() && source.node.value === DEFAULT_CLASSNAMES_IMPORT_VALUE) {
@@ -55,9 +83,12 @@ export default function (babel) {
         }
       }
     },
-    JSXAttribute (path) {
+    JSXAttribute (path, state) {
       const value = path.node.value
       if (!value) return
+
+      if (!checkExtensions(state)) return
+      if (!checkExcludes(state)) return
 
       const { type, expression } = value
       if (

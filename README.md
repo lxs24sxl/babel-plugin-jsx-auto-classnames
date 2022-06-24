@@ -103,10 +103,22 @@ function App () {
 }
 ```
 
+## Options
+
+### `extensions`
+
+- **Type:** `string[]`
+- **Default:** `['.jsx', '.tsx']`
+
+### `excludes`
+
+- **Type:** `string[]`
+- **Default:** `['node_modules']`
+
 
 ## TODO
 - [x] Avoid multiple imports of classnames' dependency packages
-- [ ] Find a compatible solution for TS
+- [x] Find a compatible solution for TS
 ```javascript
 declare namespace React {
   interface HTMLAttributes<any> extends AriaAttributes, DOMAttributes<any>  {
@@ -114,4 +126,6 @@ declare namespace React {
   }
 }
 ```
-- [ ] Add `exclude` and `include` attributes
+- [x] Add `excludes` attributes
+- [x] Add `extensions` attributes
+- [ ] Unit Testing
