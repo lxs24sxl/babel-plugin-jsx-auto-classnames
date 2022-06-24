@@ -21,12 +21,18 @@ pnpm add babel-plugin-jsx-auto-classnames -D
 ```js
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
-import JsxAutoClassnames from 'babel-plugin-jsx-auto-classnames'
+// import JsxAutoClassnames from 'babel-plugin-jsx-auto-classnames'
 
 export default defineConfig({
   plugins: [react({
     babel: {
-      plugins: [JsxAutoClassnames]
+      // plugins: [JsxAutoClassnames],
+      plugins: [
+        ['jsx-auto-classnames', {
+          extensions: ['.jsx', '.tsx'],
+          excludes: ['src/excludes']
+        }]
+      ]
     }
   })]
 })
